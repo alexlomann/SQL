@@ -1,0 +1,53 @@
+CREATE TABLE smartphones #создание таблицы 
+(ID int AUTO_INCREMENT NOT NULL PRIMARY KEY, # присвоение уникального ключа строке
+brand VARCHAR(45) NOT NULL, # название производителя
+model VARCHAR(45) NOT NULL, # модель смартфона
+price INT NOT NULL, # стоимость смартфона
+in_stock INT NOT NULL);
+
+SELECT *
+from smartphones; #чекнул созданную таблицу
+
+INSERT INTO smartphones (brand, model, price, in_stock) #заполняю таблицу
+VALUES 
+('Samsung', 'Galaxy S22', 921, 2), 
+('Samsung', 'Galaxy A53 5G', 745, 7),
+('Samsung', 'Galaxy M32', 845, 3),
+('Samsung', 'Galaxy Flip3 5G', 1232, 16),
+('Iphone', 'iPhone 8 Plus', 752, 10),
+('Iphone', 'iPhone X', 894, 7),
+('Iphone', 'iPhone 11 Pro Max', 1027, 3),
+('Iphone', 'iPhone 12 Mini', 1230, 5),
+('Iphone', 'iPhone 15', 1547, 6);
+
+SELECT *
+from smartphones; #чекнул заполненную таблицу
+
+----------------------------------------------------------------------------------------------------------
+#работа с запросами к БД
+
+SELECT model, brand, price  #выведите название, производителя и цену для товаров, количество которых превышает 5
+from smartphones
+WHERE in_stock > 5;
+
+SELECT brand, model, price, in_stock  #Выведите весь ассортимент товаров марки “Samsung”
+from smartphones 
+WHERE brand = 'Samsung' ORDER BY price; #вывод по стоимости по возрастанию
+
+SELECT brand, model, price, in_stock  #Товары, в которых есть упоминание "Iphone"
+from smartphones 
+WHERE brand = 'Iphone' ORDER BY in_stock; 
+
+SELECT brand, model, price, in_stock  #Товары, в которых есть упоминание "Samsung"
+from smartphones 
+WHERE brand = 'Samsung' ORDER BY in_stock; 
+
+
+---------------------------------------------------------------------------------------------------------------
+SELECT model, in_stock  #Товары, в которых есть ЦИФРЫ (я так понял что цыфры должны быть в названии модели. Цифры в стоимости и количестве - это понятно. В названии производителя - возможно, остается только в модели.)
+from smartphones 
+WHERE  model REGEXP '[0-9]';
+
+SELECT model, in_stock  #Товары, в которых есть цифра 8 (тоже проверял по названию модели)
+from smartphones 
+WHERE  model REGEXP '[8]';
